@@ -1,0 +1,55 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+_ReSharper*/
+*.ReSharper
+*.DotSettings.user
+
+## Build output
+out/
+publish/
+
+## Rider
+.idea/
+*.sln.iml
+
+## Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+
+## Logs
+logs/
+*.log
+
+## Secrets (NEVER commit these)
+**/secrets.json
+**/appsettings.*.json
+!**/appsettings.json
+!**/appsettings.Development.json
+
+## Environment
+.env
+.env.*
+
+## Docker
+docker-compose.override.yml
+
+## Coverage
+coverage/
+coverage-report/
+*.cobertura.xml
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+## OS
+.DS_Store
+Thumbs.db
