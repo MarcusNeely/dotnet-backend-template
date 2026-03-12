@@ -34,6 +34,7 @@ Invoke by asking Claude: *"Use the [agent name] to..."*
 | **Error Handler & Logger** | `.claude/agents/error-handler-logger.md` | Exception mapping, Serilog, structured logging |
 | **Testing Specialist** | `.claude/agents/testing-specialist.md` | xUnit unit tests, WebApplicationFactory integration tests |
 | **DevOps Assistant** | `.claude/agents/devops-assistant.md` | Docker, GitHub Actions CI/CD, Azure deployment |
+| **Orchestrator** | `.claude/agents/orchestrator.md` | Coordinate multi-agent pipelines — use this to run a full workflow |
 
 **Example invocations:**
 - *"Use the API architect to design a product catalog feature"*
@@ -166,6 +167,32 @@ dotnet list package --vulnerable                  # Security audit
 7. Open Swagger UI at `https://localhost:5001/swagger`
 8. Use the **API Architect** agent to plan your feature routes
 9. Use the **Database Specialist** agent to design your domain schema
+
+---
+
+## Agent Workflows
+
+Agents are aware of each other and will recommend handoffs when appropriate. For coordinated multi-agent pipelines, invoke the **Orchestrator** agent.
+
+### Standard Pipelines
+
+| Workflow | Agents Involved (in order) |
+|----------|---------------------------|
+| **New Project Setup** | Architect → Database → Auth → DevOps → Docs |
+| **New Feature** | Architect → Database → Auth → Error Handler → Tester → Security → Docs |
+| **API Integration** | Architect → Auth → Error Handler → Tester → Docs |
+| **Database Migration** | Database → Architect → Performance → Tester → Docs |
+| **Bug Fix** | Tester → Architect → Database → Security → Docs |
+| **Performance Optimization** | Performance → Database → Architect → Tester → Docs |
+| **Pre-Release Audit** | Security → Auth → Tester → DevOps → Docs |
+| **Documentation Sprint** | Docs → Tester → Architect |
+
+### How Agents Communicate
+
+- Each agent's instructions include a **Handoffs** section listing which agents to recommend next
+- When an agent completes work, it provides a summary for the next agent to pick up from
+- The **Orchestrator** manages the full pipeline, passing context between agents and announcing each step
+- You can run a full pipeline by saying: *"Use the Orchestrator to run the New Feature pipeline for [feature name]"*
 
 ---
 

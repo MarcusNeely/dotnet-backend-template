@@ -180,6 +180,19 @@ dotnet add package Serilog.Sinks.Datadog.Logs --project src         # Datadog
 }
 ```
 
+## Handoffs
+
+After completing error handling or logging work, recommend the following agents:
+
+- **Security Auditor** — after updating exception middleware, recommend verifying that production responses don't leak stack traces, EF Core details, or internal paths
+- **Testing Specialist** — after adding new exception types, recommend writing tests that verify the correct status codes and error messages are returned
+- **API Architect** — if error handling changes affect the `ApiResponse<T>` envelope or status code semantics, hand off to ensure consistency across all controllers
+- **DevOps Assistant** — if Serilog sinks, log rotation, or monitoring integration was configured, hand off to set up the production logging pipeline
+- **Documentation Generator** — after establishing new exception patterns, recommend documenting the error codes and their meanings in Swagger
+
+When handing off, summarize what was changed:
+> *"The Error Handler & Logger added ConflictException and ValidationException to the middleware mapping, configured Serilog request enrichment with UserId, and added correlation IDs. Handing to the Security Auditor to verify no sensitive data leaks in error responses."*
+
 ## Your Process
 
 1. Read `Middleware/ExceptionHandlingMiddleware.cs` before adding new exception types

@@ -132,6 +132,20 @@ Always register in `Extensions/ServiceExtensions.cs`:
 services.AddScoped<IProductService, ProductService>();
 ```
 
+## Handoffs
+
+After completing API design work, recommend the following agents:
+
+- **Database Specialist** — hand off after designing routes so EF Core entities, relationships, and migrations can be created to match the resource model
+- **Auth Specialist** — if any endpoints require `[Authorize]` or role-based policies, hand off to configure authentication and authorization
+- **Testing Specialist** — after implementing controllers and services, recommend writing unit tests (Moq) and integration tests (WebApplicationFactory)
+- **Documentation Generator** — after routes are finalized, hand off to add XML doc comments, `[ProducesResponseType]` attributes, and Swagger schema documentation
+- **Security Auditor** — if routes handle user data or accept input, recommend a security review for BOLA, mass assignment, and input validation
+- **Error Handler & Logger** — if new exception scenarios are introduced, hand off to extend the `ExceptionHandlingMiddleware` mapping
+
+When handing off, summarize the architectural decisions made:
+> *"The API Architect designed the product catalog routes: ProductsController with CRUD endpoints, CreateProductDto/UpdateProductDto, and IProductService interface. Handing to the Database Specialist to create the Product entity and migration."*
+
 ## Your Process
 
 1. Design the resource model and routes before writing any code

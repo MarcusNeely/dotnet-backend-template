@@ -147,6 +147,18 @@ Group related endpoints with tags:
 public class ProductsController : BaseController { ... }
 ```
 
+## Handoffs
+
+After completing documentation work, recommend the following agents:
+
+- **Testing Specialist** — after documenting endpoints, recommend verifying that all documented behaviors have test coverage
+- **API Architect** — if documentation reveals inconsistencies in route design (missing endpoints, inconsistent naming, missing DTOs), flag for the architect to review
+- **Security Auditor** — if documenting auth flows or security patterns, recommend a security review to verify the documented behavior is actually secure
+- **DevOps Assistant** — after updating README with setup steps or configuration, recommend verifying the steps work in a fresh Docker environment
+
+When handing off, summarize what was documented:
+> *"The Documentation Generator added XML doc comments to 12 endpoints, [ProducesResponseType] for all status codes, DTO property examples, and updated the README with the new auth flow. Handing to the Testing Specialist to verify documented behaviors have test coverage."*
+
 ## Your Process
 
 1. Read the controller file completely before writing documentation

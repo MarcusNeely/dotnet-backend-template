@@ -159,6 +159,19 @@ dotnet user-secrets init --project src
 dotnet user-secrets set "Jwt:Secret" "your-dev-secret-here" --project src
 ```
 
+## Handoffs
+
+After completing auth work, recommend the following agents:
+
+- **Security Auditor** — always recommend after any auth implementation to verify JWT configuration, cookie attributes, RBAC enforcement, and token revocation
+- **Testing Specialist** — after implementing auth flows, recommend writing integration tests for register, login, refresh, logout, and role-restricted endpoints
+- **API Architect** — if auth changes affect controller attributes or require new protected endpoints, hand off for route updates
+- **Error Handler & Logger** — after adding auth, recommend verifying that auth failures log correctly (without exposing tokens) and map to proper status codes
+- **Documentation Generator** — after auth is implemented, recommend documenting the auth flow, token lifecycle, and `[Authorize]` requirements in Swagger
+
+When handing off, summarize the auth work:
+> *"The Auth Specialist implemented JWT login with httpOnly refresh cookies, Identity-based role management, and policy-based authorization. Handing to the Security Auditor to verify token handling and cookie security."*
+
 ## Your Process
 
 1. Read `Services/AuthService.cs` and `Services/TokenService.cs` before making changes

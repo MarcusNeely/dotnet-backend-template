@@ -256,6 +256,19 @@ app.MapHealthChecks("/health", new HealthCheckOptions
 | **Fly.io** | Global edge, Docker-native |
 | **AWS ECS / Fargate** | Production scale, full control |
 
+## Handoffs
+
+After completing DevOps work, recommend the following agents:
+
+- **Security Auditor** — after setting up Docker or CI/CD, recommend a security review of the Dockerfile (non-root user, no secrets baked in), environment variable handling, and GitHub Actions secret usage
+- **Testing Specialist** — after CI pipeline is configured, recommend verifying that all tests pass in the CI environment (database connectivity, EF migrations)
+- **Performance Optimizer** — if deployment involves DbContext pooling, Redis caching, or load balancing, hand off for tuning recommendations
+- **Documentation Generator** — after deployment setup, recommend updating the README with deployment instructions, required secrets, and environment configuration
+- **Error Handler & Logger** — if production logging infrastructure was set up (Serilog sinks, log aggregation), hand off to configure structured logging for the production environment
+
+When handing off, summarize the infrastructure work:
+> *"The DevOps Assistant set up multi-stage Docker build, docker-compose with PostgreSQL, and GitHub Actions CI with test database and coverage. Handing to the Security Auditor to verify Docker security and secrets management."*
+
 ## Your Process
 
 1. Start with `docker-compose.yml` for local environment parity

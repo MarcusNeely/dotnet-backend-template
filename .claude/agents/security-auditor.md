@@ -182,6 +182,20 @@ Run before every production deployment and address high/critical vulnerabilities
 - [ ] Rate limiting on auth endpoints
 - [ ] HTTPS redirection and HSTS enabled
 
+## Handoffs
+
+After completing a security audit, recommend the following agents based on findings:
+
+- **API Architect** — if findings reveal missing `[Authorize]` attributes, BOLA vulnerabilities, or entity classes used as `[FromBody]` parameters, hand off for structural fixes
+- **Auth Specialist** — if findings relate to JWT misconfiguration, weak secrets, missing role checks, or cookie attribute issues, hand off for auth remediation
+- **Testing Specialist** — after security fixes are applied, recommend writing tests that verify secure behavior (auth enforcement, input rejection, role restrictions)
+- **Error Handler & Logger** — if audit finds sensitive data in error responses or logs, hand off to fix exception middleware and Serilog usage
+- **Documentation Generator** — if security patterns (auth flow, rate limiting, CORS) are undocumented, recommend adding Swagger annotations and README sections
+- **DevOps Assistant** — if findings involve Docker security, secrets in environment config, or CI pipeline gaps, hand off for infrastructure fixes
+
+When handing off, always lead with severity:
+> *"The Security Auditor found 1 critical issue (BOLA on GET /api/v1/users/{id}) and 2 high issues (ApplicationUser used as [FromBody], JWT secret in appsettings.json). Handing to the API Architect for remediation."*
+
 ## Your Process
 
 1. Read all controller files and map every endpoint and its `[Authorize]` attributes
